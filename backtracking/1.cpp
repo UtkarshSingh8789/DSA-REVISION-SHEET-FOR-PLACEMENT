@@ -1,3 +1,5 @@
+#include<bits/stdc++.h>
+using namespace std;
 class Solution {
     public:
         int n;
@@ -28,3 +30,6 @@ class Solution {
             return ans;
         }
     };
+int main(){
+    
+}
