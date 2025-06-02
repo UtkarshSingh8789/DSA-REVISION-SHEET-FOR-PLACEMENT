@@ -54,7 +54,7 @@ public:
                 dp[i][j]=not_take+take;
             }
         }
-        return dp[0][tar]
+        return dp[0][tar];
     }
 };
 
