@@ -30,6 +30,8 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+//VVI - 5 IMP TRAVERSAL QUESTION 1.SEARIALIZE AND DESERIALIZE BINARY TREE 2.Construct Binary Tree from Preorder and Inorder Traversal
+// 3.Construct Binary Tree from Inorder and Postorder Traversal 4.MORRIS TRAVERSAL 5.Recover a Tree From Preorder Traversal
 class Codec {
 public:
 
