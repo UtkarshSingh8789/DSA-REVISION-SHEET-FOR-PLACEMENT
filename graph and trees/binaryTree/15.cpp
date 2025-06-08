@@ -30,6 +30,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+//ISME SECOND MAXIMU NIKALNE KA TRIKA PE BHI FOCUS KRNA DOST KYUKI SECOND MINIMUM DISTACE IN GRAPH ME ISITRH SECOND MINIMUM NIKALENGE
 class Solution {
 public:
     int dfs(TreeNode* root,unordered_map<int,int>& h){
