@@ -65,6 +65,11 @@ class Tree{
         }
         return root;
     }
+    int minheight(TreeNode* root){
+        int ans=dfs(root);
+        return ans;
+    }
+    private:
     int dfs(TreeNode* root){
         if(root==NULL) return 0;
         int left=dfs(root->left);
@@ -73,14 +78,6 @@ class Tree{
             return 1+max(left,right);
         }
         return 1+min(left,right);
-    }
-    int minheight(TreeNode* root){
-        // if(root==NULL) return 0;
-        // int left=height(root->left);
-        // int right=height(root->right);
-        // return 1+max(left,right);
-        int ans=dfs(root);
-        return ans;
     }
 };
 int main(){
