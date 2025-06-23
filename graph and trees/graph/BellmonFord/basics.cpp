@@ -35,6 +35,7 @@ class Solution {
                 int w=edges[j][2];
                 if(dis[u]!=1e9 && dis[u]+w<dis[v]){
                     dis[v]=dis[u]+w;// we have to do realization for every edges n-1 times n-1 th time will decide about negative cycle;
+                    //  edges can be in any order;
                 }
             }
         }
