@@ -48,7 +48,7 @@ class DisjointSet{
     int findPar(int node){
         if(node==parent[node]) return node;
         return parent[node]=findPar(parent[node]);
-    }
+    }//t.c -> O(alpha(N)) where alpha=Inverse Ackermann function;
     void unionByRank(int x,int y){
         int parent_x=findPar(x);
         int parent_y=findPar(y);
