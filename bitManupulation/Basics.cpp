@@ -35,7 +35,7 @@ void pr_binary(int num){
     cout<<endl;
 }
 
-//B-> CHECK IF THE ITH BIT IS SET OR NOT;;
+//B-> CHECK IF THE ITH BIT IS SET OR NOT AND COUNT THE NUMBER OF SET BIT;;
 
 // CONCEPT-> it bit agr set hoga toh ith 1 leke jaayenge aur & operator lgayenge agr 1 aaya toh set hai;
 bool checkForSetbits(int num,int i){
@@ -49,7 +49,24 @@ bool checkForSetbits(int num,int i){
 
 // INPORTANT-> AGR KISI NUMBER X ME (EVEN) ITNA HI SETBIT HOGA JITNA X/2 ME HOGA;
 // AGR X ODD HUA TOH JITNA SETBIT X/2 ME HAI +1;
-
+int countSetBitApproch1(int n){
+    int count=0;
+    for(int i=0;i<32;i++){
+        if((n&(1<<i))!=0) count++;
+    }
+    return count;
+    // t.c(0(32));
+}
+int countSetBitApproch2(int n){
+    // not when we do n&(n-1) then it reset the first set bit;
+    int count=0;
+    while(n>0){
+        n=(n&(n-1));
+        count++;
+    }
+    //TC -> O(k); where k is number of set bit;
+    return count;
+}
 //C-> CHECK FOR POWER OF 2 AND 4;
 
 // CONCEPT-> if the number is of power of two then it has only set bit and the (x&(x-1))=0;
