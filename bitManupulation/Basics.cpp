@@ -45,7 +45,10 @@ bool checkForSetbits(int num,int i){
         return false;
     }
     return true;
-}
+}// kisi bhi number x me log(x) bit hote hai;
+
+// INPORTANT-> AGR KISI NUMBER X ME (EVEN) ITNA HI SETBIT HOGA JITNA X/2 ME HOGA;
+// AGR X ODD HUA TOH JITNA SETBIT X/2 ME HAI +1;
 
 //C-> CHECK FOR POWER OF 2 AND 4;
 
