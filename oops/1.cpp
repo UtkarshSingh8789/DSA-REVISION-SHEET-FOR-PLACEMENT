@@ -23,18 +23,44 @@
 #include <unordered_map>
 #include <unordered_set>
 using namespace std;
+
+// THEORY:
+// 🧱 What is a struct?
+// A struct is a user-defined data type that groups variables under one name.
+// Used here to define a binary tree node.
+
+// 💡 Why use a struct?
+// To create a node that stores:
+// val: node’s value
+// left & right: pointers to children
+
+//NOTE:
+// You can also use a class here — in C++, both work similarly, except:
+// struct: members are public by default
+// class: members are private by default
 struct TreeNode{
     int val;
     TreeNode* left;
     TreeNode* right;
-    TreeNode(int x){
+    TreeNode(int x){  // constructor:- a special function that automaticall run when an object is created;
         val=x;
         left=NULL;
         right=NULL;
     }
 };
+// class TreeNode{
+//     public:
+//     int val;
+//     TreeNode* left;
+//     TreeNode* right;
+//     TreeNode(int x){
+//         val=x;
+//         left=NULL;
+//         right=NULL;
+//     }
+// };
 class Tree{
-    public:
+    public:// data and methods accessible to everyone;
     TreeNode* buildTree(){
         // LEVEL ORDER TRAVERSAL;
         // considering -1 input as a null;
@@ -43,6 +69,9 @@ class Tree{
         cin>>rootval;
         if(rootval==-1) return NULL;
         TreeNode* root=new TreeNode(rootval);// root will hold the address of newly allocated TreeNode;
+        // we allocate the memory on heap not at stack;
+        // Unlike stack memory (which is automatically cleaned up when a function ends), heap memory stays until you delete it.
+        // if we donot delete the memory then this can lead to memory leak, especially if your tree becomes large or this code runs multiple times in a long-running system (e.g., a server or online judge).
         queue<TreeNode*> q;
         q.push(root);
         while(!q.empty()){
@@ -69,7 +98,13 @@ class Tree{
         int ans=dfs(root);
         return ans;
     }
-    private:
+    void freeTree(TreeNode* root){
+        if(root==NULL) return;
+        freeTree(root->left);
+        freeTree(root->right);
+        delete root; // free heap memory,avoids memory leak; without this your code will leak memory everytime it runs;
+    }
+    private: // data and methods are accessible inside class;
     int dfs(TreeNode* root){
         if(root==NULL) return 0;
         int left=dfs(root->left);
@@ -85,5 +120,6 @@ int main(){
     TreeNode* root=tree.buildTree();
     int h=tree.minheight(root);
     cout << "Height of the tree is: " << h << endl;
+    tree.freeTree(root);
     return 0;
 }

@@ -76,7 +76,14 @@ class Member{
     int getId(){
         return memberID;
     }
-    virtual ~Member() {}
+    virtual ~Member() {} // concept why we use this sice the destructor is in library class so ehy need this?
+
+    // key Concept:
+//     When you're using inheritance and polymorphism (i.e., using base class pointers to point to derived class objects), then:
+// ➡️ Without a virtual destructor, deleting a derived class object through a base class pointer will not call the derived class's destructor, leading to memory leaks or resource not released proper
+
+
+
 };// it is abstract class showing only essential behavior;
 // it has pure virtual frunction =0;
 // you cannot create object of member directly it forces child class to implement those function;
@@ -120,7 +127,7 @@ class Student : public Member{
     }
 };
 
-// TEACHER CLASS -INHERITANCE AND POLYNORPHISM;
+// TEACHER CLASS -INHERITANCE AND POLYMORPHISM;
 class Teacher: public Member{
     vector<Book*> vec;
     const int limit=3;
@@ -161,30 +168,27 @@ class Teacher: public Member{
 class Library {
     vector<Book*> books;
     vector<Member*> members;
-
 public:
     void addBook(Book* book) {
         books.push_back(book);
     }
-
     void addMember(Member* member) {
         members.push_back(member);
+        // member means the base class is pointing to derived class means when we have to delete members then student and teacher delete so the
+        // destructor of member function must be virtual;
     }
-
     Book* findBook(int id) {
         for (Book* book : books) {
             if (book->getId() == id) return book;
         }
         return NULL;
     }
-
     Member* findMember(int id) {
         for (Member* member : members) {
             if (member->getId() == id) return member;
         }
         return NULL;
     }
-
     void issueBook(int memberId, int bookId) {
         Member* member = findMember(memberId);
         Book* book = findBook(bookId);
@@ -219,9 +223,9 @@ public:
         }
     }
 
-    ~Library() {  // destructor we have to manually add because we are doing heap memory allocation;
+    ~Library() {  // destructor we have to manually delete because we are doing heap memory allocation;
         for (Book* book : books) delete book;
-        for (Member* member : members) delete member;
+        for (Member* member : members) delete member; // inside member at end there should be virtual destructor so that hte derived class delete;
     }
 };
 
@@ -240,19 +244,17 @@ int main() {
 
     lib.displayBooks();
     lib.displayMembers();
-
     // Issue and return operations
     lib.issueBook(1, 101); // Student issues DSA
     lib.issueBook(2, 102); // Teacher issues OOP
     lib.issueBook(1, 103); // Student issues System Design
-
     lib.returnBook(1, 101); // Student returns DSA
-
     lib.displayBooks();
     lib.displayMembers();
-
     return 0;
 }
+
+
 
 
 

@@ -22,6 +22,10 @@
 #include <unordered_map>
 #include <unordered_set>
 using namespace std;
+// setter is used to set the private values ans getter is used to get the private values;
+// encapsulation is wrapping of data and members in a single unit called class;
+// class is the blue print of object;
+// any entities in the real world is called object;
 class Graph{
     public:
     unordered_map<int,vector<int>> adjList;
