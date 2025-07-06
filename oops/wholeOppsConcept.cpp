@@ -81,16 +81,11 @@ class Member{
     // key Concept:
 //     When you're using inheritance and polymorphism (i.e., using base class pointers to point to derived class objects), then:
 // ➡️ Without a virtual destructor, deleting a derived class object through a base class pointer will not call the derived class's destructor, leading to memory leaks or resource not released proper
-
-
-
 };// it is abstract class showing only essential behavior;
 // it has pure virtual frunction =0;
 // you cannot create object of member directly it forces child class to implement those function;
 
 // STUDENT CLASS ----- inheritance and polymorphism;
-
-
 class Student : public Member{
     const int limit=2;
     vector<Book*> vec;
@@ -126,7 +121,6 @@ class Student : public Member{
         cout << "Student ID: " << memberID << ", Name: " << name << ", Books issued: " << vec.size() << endl;
     }
 };
-
 // TEACHER CLASS -INHERITANCE AND POLYMORPHISM;
 class Teacher: public Member{
     vector<Book*> vec;
@@ -161,13 +155,19 @@ class Teacher: public Member{
         cout << "Teacger ID: " << memberID << ", Name: " << name << ", Books issued: " << vec.size() << endl;
     }
 };
-
 // LIBRARY CLASS;  and concept of destructor;
-
-
 class Library {
     vector<Book*> books;
     vector<Member*> members;
+    //Enable polymorphism;
+    // member m1 behaves as student, member m2 behaves as teacher -> mant form -> polymorphism
+    // Member* m1=new Student(...);
+    //Member* m2=new Student(...);
+    // we can store different type of members in the same data Structure (e.g., vector<Member*> members;) and call:
+    //m->issueBook(book);
+    // m->returnBook(book);
+    // m->display();
+    // and correct behavior will be called at runtime depending on the actual object (Student or Teacher).
 public:
     void addBook(Book* book) {
         books.push_back(book);
@@ -190,7 +190,7 @@ public:
         return NULL;
     }
     void issueBook(int memberId, int bookId) {
-        Member* member = findMember(memberId);
+        Member* member=findMember(memberId);
         Book* book = findBook(bookId);
         if (!member || !book) {
             cout << "Invalid member or book ID.\n";
@@ -198,7 +198,6 @@ public:
         }
         member->issueBook(book);
     }
-
     void returnBook(int memberId, int bookId) {
         Member* member = findMember(memberId);
         Book* book = findBook(bookId);
@@ -208,40 +207,32 @@ public:
         }
         member->returnBook(book);
     }
-
     void displayBooks() {
         cout << "\nAll Books:\n";
         for (Book* book : books) {
             book->display();
         }
     }
-
     void displayMembers() {
         cout << "\nAll Members:\n";
         for (Member* member : members) {
             member->display();
         }
     }
-
     ~Library() {  // destructor we have to manually delete because we are doing heap memory allocation;
         for (Book* book : books) delete book;
         for (Member* member : members) delete member; // inside member at end there should be virtual destructor so that hte derived class delete;
     }
 };
-
-
 int main() {
     Library lib;
-
     // Adding books
     lib.addBook(new Book(101, "DSA", "Utkarsh Kumar"));
     lib.addBook(new Book(102, "OOP", "Bjarne Stroustrup"));
     lib.addBook(new Book(103, "System Design", "Alex Yu"));
-
     // Adding members
     lib.addMember(new Student(1, "Alice"));
     lib.addMember(new Teacher(2, "Prof. Sharma"));
-
     lib.displayBooks();
     lib.displayMembers();
     // Issue and return operations
